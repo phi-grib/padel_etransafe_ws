@@ -1,0 +1,92 @@
+{
+	"params": [
+		{
+			"name": "-maxruntime",
+			"description": "Maximum running time per molecule (in milliseconds). Use -1 for unlimited."
+		},
+		{
+			"name": "-waitingjobs",
+			"description": "Maximum number of jobs to store in queue for worker threads to process. Use -1 to set it to 50*Max threads."
+		},
+		{
+			"name": "-threads",
+			"description": "Maximum number of threads to use. Use -1 to use as many threads as the number of cpu cores"
+		},
+		{
+			"name": "-2d",
+			"description": "Calculate 1D and 2D descriptors"
+		},
+		{
+			"name": "-3d",
+			"description": "Calculate 3D descriptors"
+		},
+		{
+			"name": "-config",
+			"description": "Configuration file"
+		},
+		{
+			"name": "-convert3d",
+			"description": "Convert molecule to 3D"
+		},
+		{
+			"name": "-descriptortypes",
+			"description": "Descriptor types file"
+		},
+		{
+			"name": "-detectaromaticity",
+			"description": "Remove existing aromaticity information and automatically detect aromaticity in the molecule before calculation of descriptors"
+		},
+		{
+			"name": "-dir",
+			"description": "Set directory containing structural files"
+		},
+		{
+			"name": "-file",
+			"description": "Set file to save calculated descriptors"
+		},
+		{
+			"name": "-fingerprints",
+			"description": "Calculate fingerprints"
+		},
+		{
+			"name": "-help",
+			"description": "Print this message"
+		},
+		{
+			"name": "-log",
+			"description": "Create a log file. Name of log file is the name of the descriptors file with a .log extension."
+		},
+		{
+			"name": "-maxcpdperfile",
+			"description": "Maximum number of compounds to be stored in each descriptor file. Use 0 for unlimited"
+		},
+		{
+			"name": "-removesalt",
+			"description": "Remove salt from molecule"
+		},
+		{
+			"name": "-retain3d",
+			"description": "Retain 3D coordinates when standardizing structure. However, this may prevent some structures from being standardized"
+		},
+		{
+			"name": "-retainorder",
+			"description": "Retain order of molecules in structural files for descriptor file. This may lead to large memory use if descriptor calculations are stuck at one molecule as the others will not be written to file and cleared from memory"
+		},
+		{
+			"name": "-standardizenitro",
+			"description": "Standardize nitro groups to N(:O):O"
+		},
+		{
+			"name": "-standardizetautomers",
+			"description": "Standardize tautomers"
+		},
+		{
+			"name": "-tautomerlist",
+			"description": "SMIRKS tautomers file"			
+		},
+		{
+			"name": "-usefilenameasmolname",
+			"description":  "Use filename (minus the extension) as molecule name"
+		}
+	]
+}
