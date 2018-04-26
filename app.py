@@ -63,8 +63,8 @@ def calc_descriptors():
                  universal_newlines=True)
 
     stdout, stderr = proc.communicate()
-    print(f"<<<< OUTPUT from system call! >>>>{stdout}")
-    print(f"<<<<< ERROR from system call! >>>> {stderr}")
+    print("<<<< OUTPUT from system call! >>>>{}".format(stdout))
+    print("<<<<< ERROR from system call! >>>> {}".format(stderr))
     return stdout
 
 
