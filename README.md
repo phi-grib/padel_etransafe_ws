@@ -10,7 +10,7 @@ The first prototype of model intercomunication will consist of flame and PaDEL t
 + Flame recieves a .sdf file from user
 + Flame puts the file in the shared volume with a session id
 + User asks for service that requires external descriptor not available in flame
-+ Flame then sends a HTTP request to the port where PaDEL is listening with the parameter payload e.g.:
++ Flame then sends a HTTP POST to the port where PaDEL is listening with the parameter payload e.g.:
 ```python
 payload = {
             'filename':'mols_id.sdf',
@@ -28,4 +28,5 @@ uri = 'localhost:xxxx/padel/calc?filename=mols_id.sdf&3d=true&outfile=results_id
 request.post(uri)
 ```
 + PaDEL returns the status of the calculation and the location of the results file via JSON 
-+ Flame uses the new descriptors that are in the shared volume.
++ Flame uses the new descriptors that are in the shared volume and finishes the service that user asked for.
++ The setup of the containers, the network and the volume will be done with docker-compose 
