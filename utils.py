@@ -3,7 +3,9 @@ import urllib
 import json
 
 def build_cmd(uri):
-
+    '''
+    Builds PaDEL launch commant from postet uri 
+    '''
     cmd = 'java -Djava.awt.headless=true -jar PaDEL/PaDEL-Descriptor.jar'.split(' ')
     # get query fragment
     query = urllib.parse.urlparse(uri).query
@@ -14,6 +16,9 @@ def build_cmd(uri):
     return final_cmd
 
 def get_padel_params(file):
+    '''
+    Returns JSON 
+    '''
     with open(file) as f:
         params = json.load(f)
     return params

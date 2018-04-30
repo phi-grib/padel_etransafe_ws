@@ -10,7 +10,6 @@ app = Flask(__name__)
 
 
 # TODO: 
-# - get PaDEL parameters from padel_help.json
 # - habdle the REST uri in calc_descriptors()
 # - return JSON with results ( path of the results file)
 # and status of the executions
