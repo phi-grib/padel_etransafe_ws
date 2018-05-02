@@ -3,19 +3,19 @@ from flask import jsonify
 from flask import make_response
 from flask import abort
 from flask import request
-from subprocess import Popen, PIPE, STDOUT
+
 
 import utils
 app = Flask(__name__)
 
 
-# TODO: 
+# TODO:
 # - habdle the REST uri in calc_descriptors()
 # - return JSON with results ( path of the results file)
 # and status of the executions
 
 
-@app.route('/padel/get_params', methods=['GET'])
+@app.route('/padel/api/v0.1/get_params', methods=['GET'])
 def get_params():
     '''
     Returns query parameters for PaDEL-Descriptor.jar
@@ -24,24 +24,41 @@ def get_params():
     return jsonify(params)
 
 
-
-@app.route('/padel', methods=['POST'])
-def calc_descriptors():
+@app.route('/padel/api/v0.1/calc/uri', methods=['POST'])
+def digest_uri():
     '''
-    parse query and returns path of file with calculated descriptors
+    parse uri and returns path of file with calculated descriptors
     '''
     uri = request.url  # request POST url
     cmd = utils.build_cmd(uri)
 
-    # Make system call to PaDEL-Descriptor.jar
-    proc = Popen(cmd, stdout=PIPE,
-                 stdin=PIPE,
-                 stderr=PIPE,
-                 universal_newlines=True)
+    stdout, _ = utils.calc_descriptors(cmd)
 
-    stdout, stderr = proc.communicate()
-    print("<<<< OUTPUT from system call! >>>>{}".format(stdout))
-    print("<<<<< ERROR from system call! >>>> {}".format(stderr))
+    return stdout
+
+
+@app.route('/padel/api/v0.1/calc/json', methods=['POST'])
+def digest_json():
+    '''
+    parse json and returns path of file with calculated descriptors
+    '''
+    if not request.json or not 'params' in request.json:
+        abort(400)
+    
+    params = {
+        'id': tasks[-1]['id'] + 1,
+        'title': request.json['title'],
+        'description': request.json.get('description', ""),
+        'done': False
+    }
+
+    return jsonify({'task': task}), 201
+
+    uri = request.url  # request POST url
+    cmd = utils.build_cmd(uri)
+
+    stdout, _ = utils.calc_descriptors(cmd)
+
     return stdout
 
 

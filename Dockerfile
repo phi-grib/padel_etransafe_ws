@@ -9,3 +9,4 @@ RUN wget http://www.yapcwsoft.com/dd/padeldescriptor/PaDEL-Descriptor.zip && \
 
 ENTRYPOINT [ "python", "app.py" ]
 
+
