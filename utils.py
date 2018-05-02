@@ -1,13 +1,12 @@
-
-import urllib
 import json
+import urllib
 from subprocess import Popen, PIPE, STDOUT
 
 
 def build_cmd(uri):
-    '''
+    """
     Builds PaDEL launch commant from postet uri
-    '''
+    """
     cmd = ['java',
            '-Djava.awt.headless=true',
            '-jar',
@@ -23,16 +22,15 @@ def build_cmd(uri):
 
 
 def get_padel_params(file):
-    '''
+    """
     Returns JSON
-    '''
+    """
     with open(file) as f:
         params = json.load(f)
     return params
 
 
 def calc_descriptors(cmd):
-    
     # Make system call to PaDEL-Descriptor.jar
     proc = Popen(cmd, stdout=PIPE,
                  stdin=PIPE,

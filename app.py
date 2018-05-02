@@ -17,18 +17,19 @@ app = Flask(__name__)
 
 @app.route('/padel/api/v0.1/get_params', methods=['GET'])
 def get_params():
-    '''
+    """
     Returns query parameters for PaDEL-Descriptor.jar
-    '''
+    """
     params = utils.get_padel_params('padel_help.json')
     return jsonify(params)
 
 
 @app.route('/padel/api/v0.1/calc/uri', methods=['POST'])
 def digest_uri():
-    '''
+    """
     parse uri and returns path of file with calculated descriptors
-    '''
+    """
+ 
     uri = request.url  # request POST url
     cmd = utils.build_cmd(uri)
 
@@ -39,27 +40,30 @@ def digest_uri():
 
 @app.route('/padel/api/v0.1/calc/json', methods=['POST'])
 def digest_json():
-    '''
+    """
     parse json and returns path of file with calculated descriptors
-    '''
-    if not request.json or not 'params' in request.json:
+    """
+
+    if not request.json:
         abort(400)
-    
-    params = {
-        'id': tasks[-1]['id'] + 1,
-        'title': request.json['title'],
-        'description': request.json.get('description', ""),
-        'done': False
-    }
 
-    return jsonify({'task': task}), 201
+    req_json = request.json
 
-    uri = request.url  # request POST url
-    cmd = utils.build_cmd(uri)
-
-    stdout, _ = utils.calc_descriptors(cmd)
-
-    return stdout
+    # params = {
+    #     'id': tasks[-1]['id'] + 1,
+    #     'title': request.json['title'],
+    #     'description': request.json.get('description', ""),
+    #     'done': False
+    # }
+    #
+    # return jsonify({'task': task}), 201
+    #
+    # uri = request.url  # request POST url
+    # cmd = utils.build_cmd(uri)
+    #
+    # stdout, _ = utils.calc_descriptors(cmd)
+    print(req_json)
+    return jsonify(req_json)
 
 
 if __name__ == '__main__':
