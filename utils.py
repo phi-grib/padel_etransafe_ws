@@ -3,7 +3,21 @@ import urllib
 from subprocess import Popen, PIPE, STDOUT
 
 
-def build_cmd(uri):
+def build_cmd_from_uri(args):
+    """
+    Builds PaDEL launch commant from postet uri
+    """
+    cmd = ['java',
+           '-Djava.awt.headless=true',
+           '-jar',
+           'PaDEL/PaDEL-Descriptor.jar']
+
+    params_l = ["-" + k + " " + v for k, v in args.items()]
+    final_cmd = cmd + params_l
+    return final_cmd
+
+
+def build_cmd_from_json(json):
     """
     Builds PaDEL launch commant from postet uri
     """
@@ -13,10 +27,9 @@ def build_cmd(uri):
            'PaDEL/PaDEL-Descriptor.jar']
 
     # get query fragment
-    query = urllib.parse.urlparse(uri).query
     # parse string of params to list of tuples
-    params = urllib.parse.parse_qsl(query)
-    params_l = ["-" + k + " " + v for k, v in params]
+    # params = urllib.parse.parse_qsl(query)
+    params_l = ["-" + k + " " + v for k, v in json.items()]
     final_cmd = cmd + params_l
     return final_cmd
 

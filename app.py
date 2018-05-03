@@ -29,13 +29,13 @@ def digest_uri():
     """
     parse uri and returns path of file with calculated descriptors
     """
- 
-    uri = request.url  # request POST url
-    cmd = utils.build_cmd(uri)
+    args = request.args  # request POST url args
+    cmd = utils.build_cmd_from_uri(args)
 
-    stdout, _ = utils.calc_descriptors(cmd)
+    return jsonify(cmd)
+    # stdout, _ = utils.calc_descriptors(cmd)
 
-    return stdout
+    # return stdout
 
 
 @app.route('/padel/api/v0.1/calc/json', methods=['POST'])
@@ -48,22 +48,12 @@ def digest_json():
         abort(400)
 
     req_json = request.json
+    cmd = utils.build_cmd_from_json(req_json)
+    
+    return jsonify(cmd)
 
-    # params = {
-    #     'id': tasks[-1]['id'] + 1,
-    #     'title': request.json['title'],
-    #     'description': request.json.get('description', ""),
-    #     'done': False
-    # }
-    #
-    # return jsonify({'task': task}), 201
-    #
-    # uri = request.url  # request POST url
-    # cmd = utils.build_cmd(uri)
-    #
     # stdout, _ = utils.calc_descriptors(cmd)
-    print(req_json)
-    return jsonify(req_json)
+    # return jsonify(req_json)
 
 
 if __name__ == '__main__':
