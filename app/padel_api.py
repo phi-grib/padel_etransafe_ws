@@ -4,8 +4,8 @@ from flask import make_response
 from flask import abort
 from flask import request
 
-
 import utils
+
 app = Flask(__name__)
 
 
@@ -32,10 +32,9 @@ def digest_uri():
     args = request.args  # request POST url args
     cmd = utils.build_cmd_from_uri(args)
 
-    return jsonify(cmd)
-    # stdout, _ = utils.calc_descriptors(cmd)
-
-    # return stdout
+    # return jsonify(cmd)
+    stdout, _ = utils.calc_descriptors(cmd)
+    return jsonify(stdout)
 
 
 @app.route('/padel/api/v0.1/calc/json', methods=['POST'])
@@ -49,12 +48,11 @@ def digest_json():
 
     req_json = request.json
     cmd = utils.build_cmd_from_json(req_json)
-    
-    return jsonify(cmd)
 
-    # stdout, _ = utils.calc_descriptors(cmd)
-    # return jsonify(req_json)
+    # return jsonify(cmd)
+    stdout, _ = utils.calc_descriptors(cmd)
+    return jsonify(stdout)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

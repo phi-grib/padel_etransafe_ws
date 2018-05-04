@@ -12,7 +12,7 @@ def request_with_json():
     }
 
     req = requests.post(uri, json=payload)
-    print(req.json())
+    print(req.text)
 
 
 def request_with_uri():

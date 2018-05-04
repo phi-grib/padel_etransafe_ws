@@ -1,0 +1,9 @@
+version: '3'
+services:
+  padel:
+    build: .
+    ports:
+     - "5000:5000"
+  ubuntu:
+    image: "ubuntu"
+    
