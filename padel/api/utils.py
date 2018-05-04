@@ -46,3 +46,5 @@ def calc_descriptors(cmd):
                  universal_newlines=True)
     stdout, stderr = proc.communicate()
     return stdout, stderr
+
+

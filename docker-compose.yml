@@ -1,9 +1,23 @@
 version: '3'
+
 services:
+
   padel:
-    build: .
+
+    build: 
+      context: ./padel/
+      dockerfile: padel.Dockerfile
     ports:
      - "5000:5000"
-  ubuntu:
-    image: "ubuntu"
     
+  requester:
+
+    build: 
+      context: ./requester/
+      dockerfile: req.Dockerfile
+    links:
+     - padel
+    
+    stdin_open: true
+    tty: true
+

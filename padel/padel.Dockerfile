@@ -1,13 +1,13 @@
 FROM openkbs/jre-mvn-py3
 
-WORKDIR /opt/app
+WORKDIR /opt/api
 
 RUN wget http://www.yapcwsoft.com/dd/padeldescriptor/PaDEL-Descriptor.zip && \
     unzip PaDEL-Descriptor.zip 
 
-COPY app /opt/app/
+COPY api /opt/api/
 
 EXPOSE 5000
-ENTRYPOINT [ "python", "app.py" ]
+ENTRYPOINT [ "python", "padel_api.py" ]
 
 
