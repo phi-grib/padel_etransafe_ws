@@ -1,3 +1,6 @@
+
+import sys
+import uuid
 from flask import Flask
 from flask import jsonify
 from flask import make_response
@@ -29,12 +32,14 @@ def digest_uri():
     """
     parse uri and returns path of file with calculated descriptors
     """
+    uid = uuid.uuid4().hex[:6].upper()  # make a session id
+
     args = request.args  # request POST url args
     cmd = utils.build_cmd_from_uri(args)
 
     # return jsonify(cmd)
-    stdout, _ = utils.calc_descriptors(cmd)
-    return jsonify(stdout)
+    result = utils.launch_padel(cmd, uid)
+    return jsonify(result)
 
 
 @app.route('/padel/api/v0.1/calc/json', methods=['POST'])
@@ -46,12 +51,17 @@ def digest_json():
     if not request.json:
         abort(400)
 
-    req_json = request.json
-    cmd = utils.build_cmd_from_json(req_json)
+    uid = uuid.uuid4().hex[:6].upper()  # make a session id
 
-    # return jsonify(cmd)
-    stdout, _ = utils.calc_descriptors(cmd)
-    return jsonify(stdout)
+    req_json = request.json  # get json from post
+    cmd = utils.build_cmd_from_json(req_json, uid)  # build cmd
+    print(cmd)
+
+    try:
+        result = utils.launch_padel(cmd, uid)
+    except:
+        abort(500)
+    return jsonify(result)
 
 
 if __name__ == '__main__':

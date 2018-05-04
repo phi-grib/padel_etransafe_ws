@@ -9,6 +9,9 @@ services:
       dockerfile: padel.Dockerfile
     ports:
      - "5000:5000"
+    volumes:
+      - data-volume:/opt/data
+    tty: true
     
   requester:
 
@@ -17,7 +20,11 @@ services:
       dockerfile: req.Dockerfile
     links:
      - padel
+    volumes:
+      - data-volume:/opt/data
     
     stdin_open: true
     tty: true
 
+volumes:
+  data-volume:

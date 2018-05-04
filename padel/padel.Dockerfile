@@ -8,6 +8,6 @@ RUN wget http://www.yapcwsoft.com/dd/padeldescriptor/PaDEL-Descriptor.zip && \
 COPY api /opt/api/
 
 EXPOSE 5000
-ENTRYPOINT [ "python", "padel_api.py" ]
+ENTRYPOINT [ "python", "-u", "padel_api.py" ]
 
 

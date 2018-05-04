@@ -9,11 +9,13 @@ def request_with_json():
     uri = "http://padel:5000/padel/api/v0.1/calc/json"
 
     payload = {
-        '-filename': 'sgdsgd.sdf'
+        '-2d': '',
+        '-dir': '/opt/data/',
+        '-log': ''
     }
 
     req = requests.post(uri, json=payload)
-    print(req.text)
+    print(req.json())
 
 
 def request_with_uri():
