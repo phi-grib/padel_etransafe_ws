@@ -50,7 +50,7 @@ def build_cmd_from_json(json, uid, cmd=base_cmd):
 
     workdir = json['-dir']  # get work dir from POST json
     # build the results file string:
-    absolute_file_name = workdir + 'padel_results_{}'.format(uid)
+    absolute_file_name = workdir + 'padel_results_{}.csv'.format(uid)
     # build list with param name, value
     filename_param = ['-file', absolute_file_name]
     # concat all parameter lists:
