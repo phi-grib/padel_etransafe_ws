@@ -1,5 +1,6 @@
 
 import sys
+import os
 import uuid
 from flask import Flask
 from flask import jsonify
@@ -11,12 +12,10 @@ import utils
 
 app = Flask(__name__)
 
-
 # TODO:
 # - habdle the REST uri in calc_descriptors()
 # - return JSON with results ( path of the results file)
 # and status of the executions
-
 
 @app.route('/padel/api/v0.1/get_params', methods=['GET'])
 def get_params():
@@ -55,14 +54,12 @@ def digest_json():
 
     req_json = request.json  # get json from post
     cmd = utils.build_cmd_from_json(req_json, uid)  # build cmd
-    print(cmd)
 
     try:
         result = utils.launch_padel(cmd, uid)
     except:
         abort(500)
     return jsonify(result)
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

@@ -6,7 +6,7 @@ import requests
 
 # uri hostid uses padel bcause is the name of the service in docker-compose
 def request_with_json():
-    uri = "http://padel:5000/padel/api/v0.1/calc/json"
+    uri = "http://localhost:5000/padel/api/v0.1/calc/json"
 
     payload = {
         '-2d': '',
@@ -19,7 +19,7 @@ def request_with_json():
 
 
 def request_with_uri():
-    uri = "http://padel:5000/padel/api/v0.1/calc/uri"
+    uri = "http://localhost:5000/padel/api/v0.1/calc/uri"
 
     payload = {'key1': 'value1', 'key2': 'value2'}
     req = requests.post(uri, params=payload)
