@@ -20,9 +20,9 @@ def get_padel_params(file):
 base_cmd = ['java',
             '-Djava.awt.headless=true',
             '-jar', 'PaDEL-Descriptor.jar',
-            '-log',
             '-maxruntime', '-1',
             '-retainorder',
+            '-threads', '1',
             '-descriptortypes', 'padel_descriptors.xml']
 
 
@@ -71,16 +71,33 @@ def launch_padel(cmd, uid):
           'filename': result filename})
     """
 
+    # proc = Popen(['C:/Program Files (x86)/Common Files/Oracle/Java/java.exe','-version'],
+    #              stdout=PIPE,
+    #              stdin=PIPE,
+    #              stderr=PIPE,
+    #              universal_newlines=True)
+
+    # stdout, stderr = proc.communicate()
+
+    # print (stdout, stderr)
+
+    print (cmd)
+
+        
+    my_env = os.environ.copy()
+
+
     proc = Popen(cmd,
                  stdout=PIPE,
                  stdin=PIPE,
                  stderr=PIPE,
-                 universal_newlines=True)
+                 universal_newlines=True, env=my_env)
 
     stdout, stderr = proc.communicate()
 
     result = dict()
     if stderr:
+        print (stderr)
         result['success'] = False
     else:
         result['success'] = True
