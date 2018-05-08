@@ -19,8 +19,11 @@ def get_padel_params(file):
 
 base_cmd = ['java',
             '-Djava.awt.headless=true',
-            '-jar', 
-            'PaDEL-Descriptor.jar']       
+            '-jar', 'PaDEL-Descriptor.jar',
+            '-log',
+            '-maxruntime', '-1',
+            '-retainorder',
+            '-descriptortypes', 'padel_descriptors.xml']
 
 
 def build_cmd_from_uri(args, cmd=base_cmd):
@@ -50,7 +53,8 @@ def build_cmd_from_json(json, uid, cmd=base_cmd):
         params_l.extend(item)
 
     # build the results file string
-    absolute_file_name = os.path.join(json['-dir'], 'padel_results_{}.csv'.format(uid))
+    absolute_file_name = os.path.join(
+        json['-dir'], 'padel_results_{}.csv'.format(uid))
     filename_param = ['-file', absolute_file_name]
 
     # concat all parameter lists:
