@@ -20,7 +20,6 @@ def get_padel_params(file):
 base_cmd = ['java',
             '-Djava.awt.headless=true',
             '-jar', 'PaDEL-Descriptor.jar',
-            '-log',
             '-maxruntime', '-1',
             '-retainorder',
             '-descriptortypes', 'padel_descriptors.xml']
