@@ -17,8 +17,8 @@ RUN git clone git://github.com/martylamb/nailgun.git && \
     gcc ng.c -o ng && \
     cp ng /bin
 
-CMD java -classpath nailgun-server-0.9.3-SNAPSHOT.jar com.martiansoftware.nailgun.NGServer& &&\ 
-    ng ng-cp ${PADEL_DIR}/lib/*jar ${PADEL_DIR}/PaDEL-Descriptor.jar
+# CMD java -classpath nailgun-server-0.9.3-SNAPSHOT.jar com.martiansoftware.nailgun.NGServer& &&\ 
+#     ng ng-cp ${PADEL_DIR}/lib/*jar ${PADEL_DIR}/PaDEL-Descriptor.jar
 
 EXPOSE 5000
 

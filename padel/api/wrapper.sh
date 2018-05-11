@@ -1,6 +1,15 @@
 #!/bin/bash
 PADEL_DIR=/opt/api
 
+
+# Start padel_api.py
+python -u padel_api.py &
+status=$?
+if [ $status -ne 0 ]; then
+  echo "Failed to start my_second_process: $status"
+  exit $status
+fi
+
 # Start nailgun service
 java -classpath nailgun-server-0.9.3-SNAPSHOT.jar com.martiansoftware.nailgun.NGServer &
 status=$?
@@ -10,20 +19,14 @@ if [ $status -ne 0 ]; then
 fi
 
 # Declare nailgun classpath
-ng ng-cp $PADEL_DIR/lib/*jar $PADEL_DIR/PaDEL-Descriptor.jar
+# ng ng-cp $PADEL_DIR/lib/*jar $PADEL_DIR/PaDEL-Descriptor.jar
+ng ng-cp
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start my_second_process: $status"
   exit $status
 fi
 
-# Start padel_api.py
-python -u padel_api.py
-status=$?
-if [ $status -ne 0 ]; then
-  echo "Failed to start my_second_process: $status"
-  exit $status
-fi
 
 # Naive check runs checks once a minute to see if either of the processes exited.
 # This illustrates part of the heavy lifting you need to do if you want to run
