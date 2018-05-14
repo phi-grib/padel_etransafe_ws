@@ -15,6 +15,7 @@ def start_nailgun():
            'com.martiansoftware.nailgun.NGServer']
 
     proc = Popen(cmd, stdout=PIPE, stderr=STDOUT)
+    print('Done')
 
 
 def add_cp_nailgun():
@@ -31,7 +32,7 @@ def add_cp_nailgun():
                  shell=True)
 
     stdout, stderr = proc.communicate()
-
+    print('Done')
     if stdout:
         print(stdout)
     if stderr:

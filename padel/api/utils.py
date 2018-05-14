@@ -17,9 +17,8 @@ def get_padel_params(file):
     return params
 
 
-base_cmd = ['java',
-            '-Djava.awt.headless=true',
-            '-jar', 'PaDEL-Descriptor.jar',
+base_cmd = ['ng',
+            'padeldescriptor.PaDELDescriptorApp',
             '-maxruntime', '-1',
             '-retainorder',
             '-descriptortypes', 'padel_descriptors.xml']
