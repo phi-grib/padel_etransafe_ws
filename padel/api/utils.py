@@ -21,6 +21,7 @@ base_cmd = ['ng',
             'padeldescriptor.PaDELDescriptorApp',
             '-maxruntime', '-1',
             '-retainorder',
+            '-threads', '1',
             '-descriptortypes', 'padel_descriptors.xml']
 
 
