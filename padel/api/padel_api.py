@@ -2,6 +2,7 @@
 import sys
 import os
 import uuid
+import time
 from flask import Flask
 from flask import jsonify
 from flask import make_response
@@ -9,6 +10,7 @@ from flask import abort
 from flask import request
 
 import utils
+import launch_nailgun
 
 app = Flask(__name__)
 
@@ -63,4 +65,7 @@ def digest_json():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    launch_nailgun.start_nailgun()
+    time.sleep(5)
+    launch_nailgun.add_cp_nailgun()
+    app.run(debug=False, host='0.0.0.0')
