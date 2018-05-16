@@ -6,7 +6,7 @@ RUN apt-get update &&\
 
 COPY make_requests.py /opt/
 COPY minicaco.sdf /opt/
-
+COPY single_mol.py /opt/
 WORKDIR /opt/
 
 ENTRYPOINT [ "/bin/bash" ]
