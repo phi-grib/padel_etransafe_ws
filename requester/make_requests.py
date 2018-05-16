@@ -5,8 +5,6 @@ import requests
 import pathlib
 
 # uri hostid is padel bcause it is the name of the service in docker network
-
-
 def request_with_json():
     uri = "http://padel:5000/padel/api/v0.1/calc/json"
 

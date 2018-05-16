@@ -3,6 +3,21 @@ import os
 import urllib
 from subprocess import Popen, PIPE, STDOUT
 
+BASE_CMD = ['ng',
+            'padeldescriptor.PaDELDescriptorApp',
+            '-maxruntime', '-1',
+            '-retainorder',
+            '-threads', '1',
+            '-descriptortypes', 'padel_descriptors.xml']
+
+NO_NAILGUN_CMD = ['java', '-jar',
+                  'PaDEL-Descriptor.jar',
+                  '-maxruntime', '-1',
+                  '-retainorder',
+                  '-threads', '1',
+                  '-log',
+                  '-descriptortypes', 'padel_descriptors.xml']
+
 
 def get_padel_params(file):
     """
@@ -15,22 +30,6 @@ def get_padel_params(file):
     with open(file) as f:
         params = json.load(f)
     return params
-
-
-base_cmd = ['ng',
-            'padeldescriptor.PaDELDescriptorApp',
-            '-maxruntime', '-1',
-            '-retainorder',
-            '-threads', '1',
-            '-descriptortypes', 'padel_descriptors.xml']
-
-# base_cmd = ['java', '-jar',
-#             'PaDEL-Descriptor.jar',
-#             '-maxruntime', '-1',
-#             '-retainorder',
-#             '-threads', '1',
-#             '-log',
-#             '-descriptortypes', 'padel_descriptors.xml']
 
 
 def build_cmd_from_uri(args, cmd=base_cmd):
@@ -46,7 +45,7 @@ def build_cmd_from_uri(args, cmd=base_cmd):
     return final_cmd
 
 
-def build_cmd_from_json(json, uid, cmd=base_cmd):
+def build_cmd_from_json(json, uid, cmd):
     """
     Builds PaDEL launch command from posted uri
 
@@ -54,6 +53,7 @@ def build_cmd_from_json(json, uid, cmd=base_cmd):
     --------
     List with commands
     """
+
     # build list of param, value from json
     params_l = []
     for item in json.items():
