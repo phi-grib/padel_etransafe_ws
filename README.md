@@ -49,7 +49,7 @@ ng ng-cp lib/*.jar PaDEL-Descriptor.jar
 `docker-compose` takes care of the shared folder. If you want to run the container **standalone** you should link a volume with `-v` parameter in the `docker run` command:
 
 ```bash
-docker run -p 5000:500 -v /host/dir:/container/dir padel_etransafe_ws_padel_1
+docker run -p 5000:5000 -v /host/dir:/container/dir padel_etransafe_ws_padel_1
 ```
 
 `padel_etransafe_ws_padel_1` can be another name.
