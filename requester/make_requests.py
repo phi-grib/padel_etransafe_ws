@@ -43,7 +43,7 @@ def request_single():
 
         payload = {
             '-2d': '',
-            '-dir': dir_.absolute(),
+            '-dir': str(dir_.absolute()),
         }
 
         req = requests.post(uri, json=payload)

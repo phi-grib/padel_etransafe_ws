@@ -24,6 +24,14 @@ base_cmd = ['ng',
             '-threads', '1',
             '-descriptortypes', 'padel_descriptors.xml']
 
+# base_cmd = ['java', '-jar',
+#             'PaDEL-Descriptor.jar',
+#             '-maxruntime', '-1',
+#             '-retainorder',
+#             '-threads', '1',
+#             '-log',
+#             '-descriptortypes', 'padel_descriptors.xml']
+
 
 def build_cmd_from_uri(args, cmd=base_cmd):
     """
@@ -81,6 +89,7 @@ def launch_padel(cmd, uid):
     result = dict()
     if stderr:
         result['success'] = False
+        result['error'] = stderr
     else:
         result['success'] = True
         result['filename'] = 'padel_results_{}.csv'.format(uid)
