@@ -19,6 +19,7 @@ The first prototype of model intercomunication will consist of flame and PaDEL t
 
 This is what you need to do in order to **run this service in your host** (outside the container.)
 install nailgun:
+
 ```bash
 git clone git://github.com/martylamb/nailgun.git
 cd nailgun
@@ -27,6 +28,7 @@ cd nailgun-client
 gcc ng.c -o ng
 cp ng ~/bin
 ```
+
 ----------
 The following is done by the flask service when it starts.
 
@@ -34,9 +36,39 @@ start nailgun server:
 
 ```bash
 java -classpath nailgun-server-0.9.3-SNAPSHOT.jar com.martiansoftware.nailgun.NGServer
-``` 
+```
 
-add padel libs to nailgun. 
+add padel libs to nailgun.
+
 ```bash
 ng ng-cp lib/*.jar PaDEL-Descriptor.jar
+```
+
+## shared folder setup
+
+`docker-compose` takes care of the shared folder. If you want to run the container **standalone** you should link a volume with `-v` parameter in the `docker run` command:
+
+```bash
+docker run -p 5000:500 -v /host/dir:/container/dir padel_etransafe_ws_padel_1
+```
+
+`padel_etransafe_ws_padel_1` can be another name.
+
+it is **strongly recommended** to use `/opt/data` as shared folder since this is the shared volume that is configured in the docker-compose.
+
+After picking a dir name for the padel service, remember that the JSON in the POST must contain a `-dir` field with the name of the folder in the container that is linked to the host.
+
+```python
+{
+    '-dir': 'container/dir/'
+}
+```
+
+And the file name of the results:
+
+```python
+{
+    '-dir': 'container/dir/',
+    '-file': 'container/dir/result_name.csv'
+}
 ```
