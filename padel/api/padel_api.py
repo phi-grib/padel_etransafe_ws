@@ -93,7 +93,7 @@ if __name__ == '__main__':
     if not args.nonailgun:
 
         launch_nailgun.start_nailgun()
-        time.sleep(5)
+        time.sleep(3)
         launch_nailgun.add_cp_nailgun()
 
         # build partial create_cmd_from_json with with no nailgun cmd  
@@ -103,4 +103,4 @@ if __name__ == '__main__':
 
     else:
         partial_cmd_json = partial(utils.build_cmd_from_json, cmd=NO_NAILGUN_CMD)
-        app.run(debug=False, host='0.0.0.0')
+        app.run(debug=True, host='0.0.0.0')

@@ -32,7 +32,7 @@ def get_padel_params(file):
     return params
 
 
-def build_cmd_from_uri(args, cmd=base_cmd):
+def build_cmd_from_uri(args, cmd=BASE_CMD):
     """
     Builds PaDEL launch command from posted uri
 
