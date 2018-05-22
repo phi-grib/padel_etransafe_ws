@@ -16,24 +16,22 @@ def get_padel_params(file):
         params = json.load(f)
     return params
 
-
-base_cmd = ['ng',
+ng_cmd = ['ng',
             'padeldescriptor.PaDELDescriptorApp',
             '-maxruntime', '-1',
             '-retainorder',
             '-threads', '1',
             '-descriptortypes', 'padel_descriptors.xml']
 
-# base_cmd = ['java', '-jar',
-#             'PaDEL-Descriptor.jar',
-#             '-maxruntime', '-1',
-#             '-retainorder',
-#             '-threads', '1',
-#             '-log',
-#             '-descriptortypes', 'padel_descriptors.xml']
+java_cmd = ['java', '-jar',
+            'PaDEL-Descriptor.jar',
+            '-maxruntime', '-1',
+            '-retainorder',
+            '-threads', '1',
+            '-descriptortypes', 'padel_descriptors.xml']
 
 
-def build_cmd_from_uri(args, cmd=base_cmd):
+def build_cmd_from_uri(args, cmd=java_cmd):
     """
     Builds PaDEL launch command from posted uri
 
@@ -46,7 +44,7 @@ def build_cmd_from_uri(args, cmd=base_cmd):
     return final_cmd
 
 
-def build_cmd_from_json(json, uid, cmd=base_cmd):
+def build_cmd_from_json(json, uid, ng):
     """
     Builds PaDEL launch command from posted uri
 
@@ -54,6 +52,12 @@ def build_cmd_from_json(json, uid, cmd=base_cmd):
     --------
     List with commands
     """
+
+    if ng:
+        cmd = ng_cmd
+    else:
+        cmd = java_cmd
+
     # build list of param, value from json
     params_l = []
     for item in json.items():

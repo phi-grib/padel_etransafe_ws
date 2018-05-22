@@ -12,6 +12,8 @@ from flask import request
 import utils
 import launch_nailgun
 
+NG = False
+
 app = Flask(__name__)
 
 # TODO:
@@ -56,7 +58,7 @@ def digest_json():
     uid = uuid.uuid4().hex[:6].upper()  # make a session id
 
     req_json = request.json  # get json from post
-    cmd = utils.build_cmd_from_json(req_json, uid)  # build cmd
+    cmd = utils.build_cmd_from_json(req_json, uid, NG)  # build cmd
 
     try:
         result = utils.launch_padel(cmd, uid)
@@ -65,7 +67,8 @@ def digest_json():
     return jsonify(result)
 
 if __name__ == '__main__':
-    launch_nailgun.start_nailgun()
-    time.sleep(5)
-    launch_nailgun.add_cp_nailgun()
+    if NG:
+        launch_nailgun.start_nailgun()
+        time.sleep(5)
+        launch_nailgun.add_cp_nailgun()
     app.run(debug=False, host='0.0.0.0')
