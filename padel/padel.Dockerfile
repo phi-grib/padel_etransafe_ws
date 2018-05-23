@@ -1,5 +1,14 @@
 FROM openkbs/jre-mvn-py3
 
+
+LABEL base.image="openkbs/jre-mvn-py3"
+LABEL software="PaDEL"
+LABEL software.version="2016012"
+LABEL description="Molecular descriptor and fingerprints"
+LABEL website="http://www.yapcwsoft.com/dd/padeldescriptor/"
+
+MAINTAINER Biel Stela <biel.stela@upf.edu>
+
 ENV PADEL_DIR /opt/api
 
 WORKDIR $PADEL_DIR
