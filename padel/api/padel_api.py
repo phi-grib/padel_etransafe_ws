@@ -12,7 +12,7 @@ from flask import request
 import utils
 import launch_nailgun
 
-NG = False
+NG = True
 
 app = Flask(__name__)
 
